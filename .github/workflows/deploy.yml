@@ -16,11 +16,6 @@ jobs:
         with:
           python-version: '3.x'
           
-      - name: Install dependencies
+      - name: Run runtime errors test
         run: |
-          python -m pip install --upgrade pip
-          pip install requests
-
-      - name: Run complex test
-        run: |
-          python complex_test.py
+          python runtime_errors.py

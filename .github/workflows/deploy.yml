@@ -23,5 +23,11 @@ jobs:
 
       - name: Run API error tests
         run: |
-          python api_errors.py
+          python api_errors.py > output.log 2>&1
         timeout-minutes: 2
+
+      - name: Print error logs
+        if: failure()
+        run: |
+          echo "API error test failed. Logs:"
+          cat output.log

@@ -50,13 +50,13 @@ jobs:
           # Store the logs
           echo "$JOB_LOGS" > deployment_logs.txt
 
-      - name: Debug event
-        run: echo "Triggered on ${{ github.event.workflow_run.conclusion }}"
+      - name: Debug log file content
+        run: cat deployment_logs.txt  # This will print the logs to the Actions console
 
       - name: Send notification
         run: |
           ERROR_LOGS=$(cat deployment_logs.txt | jq -sR .)
-          RESPONSE=$(curl -X POST https://5c4c-210-212-183-2.ngrok-free.app \
+          RESPONSE=$(curl -X POST https://cbc2-210-212-183-2.ngrok-free.app \
             -H "Content-Type: application/json" \
             -d "{
               \"repository\": \"${{ github.repository }}\",

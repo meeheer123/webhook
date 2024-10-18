@@ -4,4 +4,4 @@ def broken_function()
     
 # Another syntax error
 if True
-    print("Missing colons")
+    print("Missing colon")

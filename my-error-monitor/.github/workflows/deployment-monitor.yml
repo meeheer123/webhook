@@ -1,0 +1,38 @@
+name: Deployment Monitor
+
+on:
+  workflow_run:
+    workflows: ["Deploy Application"]
+    types:
+      - completed
+
+jobs:
+  notify-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get error logs
+        id: get_logs
+        run: |
+          RUN_ID=${{ github.event.workflow_run.id }}
+          LOGS=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                     -H "Accept: application/vnd.github.v3+json" \
+                     "https://api.github.com/repos/${{ github.repository }}/actions/runs/${RUN_ID}/logs")
+          echo "$LOGS" > deployment_logs.txt
+
+      - name: Send notification
+        run: |
+          curl -X POST https://e2c6-210-212-183-2.ngrok-free.app \
+            -H "Content-Type: application/json" \
+            -d '{
+              "repository": "${{ github.repository }}",
+              "workflow": "${{ github.event.workflow_run.name }}",
+              "status": "failed",
+              "error_logs": "'"$(cat deployment_logs.txt | jq -sR)"'",
+              "commit_sha": "${{ github.event.workflow_run.head_sha }}",
+              "commit_message": "${{ github.event.workflow_run.head_commit.message }}"
+            }'

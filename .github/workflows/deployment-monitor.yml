@@ -26,7 +26,7 @@ jobs:
 
       - name: Send notification
         run: |
-          curl -X POST https://e2c6-210-212-183-2.ngrok-free.app \
+          curl -X POST https://e6d8-210-212-183-2.ngrok-free.app \
             -H "Content-Type: application/json" \
             -d '{
               "repository": "${{ github.repository }}",

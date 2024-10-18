@@ -15,7 +15,7 @@ def receive_error():
             f.write(f"\n\nNew Error Report:\n")
             f.write(f"Repository: {data.get('repository')}\n")
             f.write(f"Error: {data.get('error_logs')}\n")
-            f.write("-" * 50)
+            f.write("-" * 50) 
         
         return jsonify({"status": "success", "message": "Error logged"}), 200
     

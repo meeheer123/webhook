@@ -28,14 +28,14 @@ jobs:
           # Debug: Check the response from the GitHub API
           echo "Job logs response: $LOGS"
           
-          # Extracting the job ID for the failed job "Run API error tests"
-          JOB_ID=$(echo "$LOGS" | jq -r '.jobs[] | select(.name == "Run API error tests") | .id')
+          # Extracting the job ID for the failed job "deploy"
+          JOB_ID=$(echo "$LOGS" | jq -r '.jobs[] | select(.name == "deploy") | .id')
           
           # Debug: Check if JOB_ID was correctly extracted
           echo "Extracted JOB ID: $JOB_ID"
           
           if [ -z "$JOB_ID" ]; then
-            echo "No job found with the name 'Run API error tests'."
+            echo "No job found with the name 'deploy'."
             exit 1
           fi
           

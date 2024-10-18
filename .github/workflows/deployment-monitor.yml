@@ -10,7 +10,7 @@ jobs:
   notify-failure:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -27,7 +27,7 @@ jobs:
       - name: Send notification
         run: |
           ERROR_LOGS=$(cat deployment_logs.txt | jq -sR .)
-          curl -X POST https://cbc2-210-212-183-2.ngrok-free.app \
+          RESPONSE=$(curl -X POST https://e2c6-210-212-183-2.ngrok-free.app \
             -H "Content-Type: application/json" \
             -d "{
               \"repository\": \"${{ github.repository }}\",
@@ -36,4 +36,5 @@ jobs:
               \"error_logs\": ${ERROR_LOGS},
               \"commit_sha\": \"${{ github.event.workflow_run.head_sha }}\",
               \"commit_message\": \"${{ github.event.workflow_run.head_commit.message }}\"
-            }"
+            }")
+          echo "Response: $RESPONSE"

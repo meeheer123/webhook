@@ -16,6 +16,12 @@ jobs:
         with:
           python-version: '3.x'
           
-      - name: Run runtime errors test
+      - name: Install dependencies
         run: |
-          python runtime_errors.py
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Run API error tests
+        run: |
+          python api_errors.py
+        timeout-minutes: 2

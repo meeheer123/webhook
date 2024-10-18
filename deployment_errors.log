@@ -24,3 +24,5 @@
 2024-10-18 18:50:24,768 - INFO - 127.0.0.1 - - [18/Oct/2024 18:50:24] "[35m[1mPOST / HTTP/1.1[0m" 500 -
 2024-10-18 18:52:41,576 - ERROR - Error processing request: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
 2024-10-18 18:52:41,577 - INFO - 127.0.0.1 - - [18/Oct/2024 18:52:41] "[35m[1mPOST / HTTP/1.1[0m" 500 -
+2024-10-18 18:57:01,980 - ERROR - Error processing request: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+2024-10-18 18:57:01,980 - INFO - 127.0.0.1 - - [18/Oct/2024 18:57:01] "[35m[1mPOST / HTTP/1.1[0m" 500 -
